@@ -1,18 +1,28 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Searcher.SearcherWindow.Alignment;
 
 public class PlayerMovement : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] float moveSpeed;
+
+    SpriteRenderer spriteRenderer;
+
+    private void Awake()
     {
-        
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        float horizontal = Input.GetAxisRaw("Horizontal");
+
+        if (horizontal != 0.0f)
+        {
+            transform.position += new Vector3(horizontal * moveSpeed * Time.deltaTime, 0, 0);
+            spriteRenderer.flipX = horizontal < 0.0f;
+        }
     }
 }
