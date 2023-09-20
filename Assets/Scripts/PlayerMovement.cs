@@ -8,13 +8,6 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] float moveSpeed;
 
-    SpriteRenderer spriteRenderer;
-
-    private void Awake()
-    {
-        spriteRenderer = GetComponent<SpriteRenderer>();
-    }
-
     void Update()
     {
         float horizontal = Input.GetAxisRaw("Horizontal");
@@ -22,7 +15,23 @@ public class PlayerMovement : MonoBehaviour
         if (horizontal != 0.0f)
         {
             transform.position += new Vector3(horizontal * moveSpeed * Time.deltaTime, 0, 0);
-            spriteRenderer.flipX = horizontal < 0.0f;
+            FlipScale(horizontal);
         }
+    }
+
+    private void FlipScale(float horizontal)
+    {
+        Vector3 scale = transform.localScale;
+
+        if (horizontal < 0)
+        {
+            scale.x = Mathf.Abs(scale.x) * -1;
+        }
+        else
+        {
+            scale.x = Mathf.Abs(scale.x);
+        }
+
+        transform.localScale = scale;
     }
 }
