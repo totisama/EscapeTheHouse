@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class InventoryManager : MonoBehaviour
@@ -8,8 +7,8 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private int inventorySize;
     [SerializeField] private Transform machineAnchor;
 
-
-    private List<Item> inventory = new List<Item>();
+    private Item activatable;
+    private Item usable;
 
     public static InventoryManager Instance;
 
@@ -27,35 +26,20 @@ public class InventoryManager : MonoBehaviour
 
     public void AddItem(Item item)
     {
-        if (inventory.Count < inventorySize)
+        if (item.GetItemType() == Globals.ItemTypes.machine)
         {
-            Debug.Log("Item added: " + item.GetItemType());
-            inventory.Add(item);
-
-            if (item.GetItemType() == Globals.ItemTypes.machine)
-            {
-                AnchorToPlayer(item);
-            }
+            activatable = item;
+            AnchorToPlayer(item);
+        }
+        else if (usable == null)
+        {
+            usable = item;
         }
     }
 
-    public void UseItem(Globals.ItemTypes type)
+    public void ActivateItem()
     {
-        if (type == Globals.ItemTypes.normal)
-        {
-            UseNormalItem();
-        }
-        else if (type == Globals.ItemTypes.machine)
-        {
-            UseMachine();
-        }
-    }
-
-    private void UseMachine()
-    {
-        Item item = inventory.Find(item => item.GetItemType() == Globals.ItemTypes.machine);
-
-        if (!item)
+        if (activatable == null)
         {
             return;
         }
@@ -63,14 +47,25 @@ public class InventoryManager : MonoBehaviour
         GameManager.Instance.ChangeNight();
     }
 
-    private void UseNormalItem()
+    public void UseItem()
     {
-        throw new NotImplementedException();
+        if (usable == null)
+        {
+            return;
+        }
+
+        Destroy(usable.gameObject);
+        usable = null;
     }
 
     private void AnchorToPlayer(Item item)
     {
         item.transform.position = Vector3.zero;
         item.transform.SetParent(machineAnchor, false);
+    }
+
+    public Globals.ItemTypes GetCurrentUsableType()
+    {
+        return usable.GetItemType();
     }
 }
