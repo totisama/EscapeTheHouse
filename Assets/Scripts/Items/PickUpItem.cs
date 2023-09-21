@@ -12,6 +12,9 @@ public class PickUpItem : MonoBehaviour
         if (onItem && Input.GetKeyDown(KeyCode.Q))
         {
             InventoryManager.Instance.AddItem(currentItem);
+
+            Rigidbody2D rb = currentItem.GetComponent<Rigidbody2D>();
+            rb.simulated = false;
         }
     }
 
