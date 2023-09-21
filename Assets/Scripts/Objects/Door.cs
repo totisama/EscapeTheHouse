@@ -41,6 +41,20 @@ public class Door : MonoBehaviour
 
     private void Start()
     {
+        SetDoorSidesSortingOrder();
+
+        if (state == DoorState.opened)
+        {
+            DoorOpened();
+        }
+        else
+        {
+            DoorClosed();
+        }
+    }
+
+    private void SetDoorSidesSortingOrder()
+    {
         if (side == DoorSide.left)
         {
             front.sortingOrder = frontSortOrder;
@@ -50,15 +64,6 @@ public class Door : MonoBehaviour
         {
             front.sortingOrder = 0;
             back.sortingOrder = frontSortOrder;
-        }
-
-        if (state == DoorState.opened)
-        {
-            DoorOpened();
-        }
-        else
-        {
-            DoorClosed();
         }
     }
 
@@ -85,15 +90,18 @@ public class Door : MonoBehaviour
         }
     }
 
-    public void OpenDoor(Globals.ItemTypes type)
+    public void OpenDoor()
     {
-        if (type != itemTypeToOpen)
-        {
-            return;
-        }
-
         background.color = openedBackgroundColor;
         handle.SetActive(false);
         coll.isTrigger = true;
+        state = DoorState.opened;
+
+        SetDoorSidesSortingOrder();
+    }
+
+    public Globals.ItemTypes GetItemTypeToOpen()
+    {
+        return itemTypeToOpen;
     }
 }

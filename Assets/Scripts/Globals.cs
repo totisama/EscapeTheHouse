@@ -6,7 +6,9 @@ public static class Globals
 
     public enum ItemTypes
     {
-        normal,
+        key,
+        finalKey,
+        book,
         machine
     }
 }
