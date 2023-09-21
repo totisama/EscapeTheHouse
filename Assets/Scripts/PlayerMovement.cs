@@ -8,13 +8,25 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] float moveSpeed;
 
-    void Update()
+    private Rigidbody2D rb;
+    private float horizontal;
+
+    private void Awake()
     {
-        float horizontal = Input.GetAxisRaw("Horizontal");
+        rb = GetComponent<Rigidbody2D>();
+    }
+
+    private void Update()
+    {
+        horizontal = Input.GetAxisRaw("Horizontal");
+    }
+
+    void FixedUpdate()
+    {
+        rb.velocity = new Vector2(horizontal * moveSpeed, rb.velocity.y);
 
         if (horizontal != 0.0f)
         {
-            transform.position += new Vector3(horizontal * moveSpeed * Time.deltaTime, 0, 0);
             FlipScale(horizontal);
         }
     }
