@@ -74,5 +74,26 @@ public class Door : MonoBehaviour
         background.color = closedBackgroundColor;
         handle.SetActive(true);
         coll.isTrigger = false;
+
+        if (side == DoorSide.left)
+        {
+            back.sortingOrder = frontSortOrder;        
+        }
+        else
+        {
+            front.sortingOrder = frontSortOrder;        
+        }
+    }
+
+    public void OpenDoor(Globals.ItemTypes type)
+    {
+        if (type != itemTypeToOpen)
+        {
+            return;
+        }
+
+        background.color = openedBackgroundColor;
+        handle.SetActive(false);
+        coll.isTrigger = true;
     }
 }
