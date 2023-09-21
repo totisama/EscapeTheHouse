@@ -1,15 +1,26 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Door : MonoBehaviour
 {
-    [SerializeField] private Color backgroundColor;
+    [Header("General")]
     [SerializeField] private DoorSide side;
+    [SerializeField] private DoorState state;
+    [SerializeField] private int frontSortOrder;
+    [Header("Closed state")]
+    [SerializeField] private Color closedBackgroundColor;
+    [SerializeField] private Globals.ItemTypes itemTypeToOpen;
+    [SerializeField] private GameObject handle;
+    [Header("Opened state")]
+    [SerializeField] private Color openedBackgroundColor;
     [Header("Sides")]
     [SerializeField] private SpriteRenderer background;
     [SerializeField] private SpriteRenderer front;
     [SerializeField] private SpriteRenderer back;
+
+    private Collider2D coll;
 
     enum DoorSide
     {
@@ -17,19 +28,51 @@ public class Door : MonoBehaviour
         left
     }
 
+    enum DoorState
+    {
+        opened,
+        closed
+    }
+
     private void Awake()
     {
-        background.color = backgroundColor;
+        coll = GetComponent<Collider2D>();
+    }
 
+    private void Start()
+    {
         if (side == DoorSide.left)
         {
-            front.sortingOrder = 6;
+            front.sortingOrder = frontSortOrder;
             back.sortingOrder = 0;
         }
         else
         {
             front.sortingOrder = 0;
-            back.sortingOrder = 6;
+            back.sortingOrder = frontSortOrder;
         }
+
+        if (state == DoorState.opened)
+        {
+            DoorOpened();
+        }
+        else
+        {
+            DoorClosed();
+        }
+    }
+
+    private void DoorOpened()
+    {
+        background.color = openedBackgroundColor;
+        handle.SetActive(false);
+        coll.isTrigger = true;
+    }
+
+    private void DoorClosed()
+    {
+        background.color = closedBackgroundColor;
+        handle.SetActive(true);
+        coll.isTrigger = false;
     }
 }
