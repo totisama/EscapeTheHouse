@@ -3,10 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UseItem : MonoBehaviour
+public class Interact : MonoBehaviour
 {
     private bool onDoor;
+    private bool onSafe;
     private Door door;
+    private Safe safe;
 
     private void Update()
     {
@@ -14,9 +16,21 @@ public class UseItem : MonoBehaviour
         {
             InventoryManager.Instance.ActivateItem();
         }
-        else if (Input.GetKeyUp(KeyCode.E) && onDoor)
+        else if (Input.GetKeyUp(KeyCode.E))
+        {
+            PressEKey();
+        }
+    }
+
+    private void PressEKey()
+    {
+        if (onDoor)
         {
             UseItemFunction();
+        }
+        else if (onSafe)
+        {
+            safe.OpenPad();
         }
     }
 
@@ -48,6 +62,11 @@ public class UseItem : MonoBehaviour
             onDoor = true;
             door = collision.gameObject.GetComponent<Door>();
         }
+        else if (collision.gameObject.CompareTag("Safe"))
+        {
+            onSafe = true;
+            safe = collision.gameObject.GetComponent<Safe>();
+        }
     }
     
     private void OnCollisionExit2D(Collision2D collision)
@@ -56,6 +75,11 @@ public class UseItem : MonoBehaviour
         {
             onDoor = false;
             door = null;
+        }
+        else if (collision.gameObject.CompareTag("Safe"))
+        {
+            onSafe = false;
+            safe = null;
         }
     }
 }
