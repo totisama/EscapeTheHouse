@@ -6,6 +6,7 @@ public static class Globals
 
     public enum ItemTypes
     {
+        none,
         key,
         finalKey,
         book,

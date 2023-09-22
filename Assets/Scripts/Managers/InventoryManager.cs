@@ -1,11 +1,15 @@
 using System;
 using System.Collections;
+using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
+using UnityEngine.U2D;
 
 public class InventoryManager : MonoBehaviour
 {
     [SerializeField] private int inventorySize;
     [SerializeField] private Transform machineAnchor;
+    [SerializeField] private InventorySlot slot;
+    [SerializeField] private string UILayerName;
 
     private Item activatable;
     private Item usable;
@@ -34,7 +38,18 @@ public class InventoryManager : MonoBehaviour
         else if (usable == null)
         {
             usable = item;
+
+            AddToUI(item);
         }
+    }
+
+    private void AddToUI(Item item)
+    {
+        SpriteRenderer sr = item.GetComponent<SpriteRenderer>();
+        sr.sortingLayerName = UILayerName;
+        sr.sortingOrder = 2;
+        item.gameObject.transform.SetParent(slot.transform);
+        item.gameObject.transform.position = slot.transform.position;
     }
 
     public void ActivateItem()
@@ -60,12 +75,17 @@ public class InventoryManager : MonoBehaviour
 
     private void AnchorToPlayer(Item item)
     {
-        item.transform.position = Vector3.zero;
-        item.transform.SetParent(machineAnchor, false);
+        item.gameObject.transform.position = Vector3.zero;
+        item.gameObject.transform.SetParent(machineAnchor, false);
     }
 
     public Globals.ItemTypes GetCurrentUsableType()
     {
+        if (usable == null)
+        {
+            return Globals.ItemTypes.none;
+        }
+
         return usable.GetItemType();
     }
 }
