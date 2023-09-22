@@ -45,11 +45,8 @@ public class InventoryManager : MonoBehaviour
 
     private void AddToUI(Item item)
     {
-        SpriteRenderer sr = item.GetComponent<SpriteRenderer>();
-        sr.sortingLayerName = UILayerName;
-        sr.sortingOrder = 2;
         item.gameObject.transform.SetParent(slot.transform);
-        item.gameObject.transform.position = slot.transform.position;
+        item.InitialiceItemUI();
     }
 
     public void ActivateItem()
