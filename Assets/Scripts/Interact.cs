@@ -62,11 +62,6 @@ public class Interact : MonoBehaviour
             onDoor = true;
             door = collision.gameObject.GetComponent<Door>();
         }
-        else if (collision.gameObject.CompareTag("Safe"))
-        {
-            onSafe = true;
-            safe = collision.gameObject.GetComponent<Safe>();
-        }
     }
     
     private void OnCollisionExit2D(Collision2D collision)
@@ -76,10 +71,28 @@ public class Interact : MonoBehaviour
             onDoor = false;
             door = null;
         }
-        else if (collision.gameObject.CompareTag("Safe"))
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Safe"))
+        {
+            onSafe = true;
+            safe = collision.gameObject.GetComponent<Safe>();
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Safe"))
         {
             onSafe = false;
             safe = null;
+        }
+        else if (collision.gameObject.CompareTag("Door"))
+        {
+            onDoor = false;
+            door = null;
         }
     }
 }
