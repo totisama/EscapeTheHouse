@@ -11,10 +11,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] int nightDuration;
     [Tooltip("In seconds")]
     [SerializeField] int nightCooldown;
-
-    private bool isNight;
     private float currentNightTime;
     private float timeToCharge;
+    private readonly List<Nocturnal> nocturnalList = new List<Nocturnal>();
+    public bool IsNight { get; private set; }
 
     public static GameManager Instance;
 
@@ -33,11 +33,21 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         startingRoom.UpdateRoomBounds();
+
+        GameObject[] nocturnalGOs = GameObject.FindGameObjectsWithTag("Nocturnal");
+        foreach (GameObject go in nocturnalGOs)
+        {
+            if (go != null)
+            {
+                nocturnalList.Add(go.GetComponent<Nocturnal>());
+                go.SetActive(false);
+            }
+        }
     }
 
     private void Update()
     {
-        if (isNight && Time.time > currentNightTime)
+        if (IsNight && Time.time > currentNightTime)
         {
             ChangeNight(true);
         }
@@ -50,19 +60,18 @@ public class GameManager : MonoBehaviour
 
     public void ChangeNight(bool forceDay = false)
     {
-        if (isNight && !forceDay)
+        if (IsNight && !forceDay)
         {
             return;
         }
 
-        if (!isNight)
+        if (!IsNight)
         {
             currentNightTime = Time.time + nightDuration;
 
             // Until the machine is charged again
             if (Time.time < timeToCharge)
             {
-                Debug.Log("Machine charging");
                 return;
             }
         }
@@ -71,8 +80,16 @@ public class GameManager : MonoBehaviour
             timeToCharge = Time.time + nightCooldown;
         }
 
-        isNight = !isNight;
+        IsNight = !IsNight;
 
-        LightManager.Instance.ChangeMainLightColor(isNight);
+        LightManager.Instance.ChangeMainLightColor(IsNight);
+
+        foreach (Nocturnal nocturnalObject in nocturnalList)
+        {
+            if (nocturnalObject != null)
+            {
+                nocturnalObject.UpdateActive(IsNight);
+            }
+        }
     }
 }
