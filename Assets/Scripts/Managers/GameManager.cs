@@ -1,18 +1,23 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
 {
     [SerializeField] CameraController cam;
     [SerializeField] RoomBounds startingRoom;
+    [SerializeField] PlayerMovement playerMovement;
     [Header("Night")]
     [Tooltip("In seconds")]
     [SerializeField] int nightDuration;
     [Tooltip("In seconds")]
     [SerializeField] int nightCooldown;
+
     private float currentNightTime;
     private float timeToCharge;
+    private string safeCode;
     private readonly List<Nocturnal> nocturnalList = new List<Nocturnal>();
     public bool IsNight { get; private set; }
 
@@ -43,6 +48,8 @@ public class GameManager : MonoBehaviour
                 go.SetActive(false);
             }
         }
+
+        CreateRandomSafeCode();
     }
 
     private void Update()
@@ -51,6 +58,13 @@ public class GameManager : MonoBehaviour
         {
             ChangeNight(true);
         }
+    }
+    private void CreateRandomSafeCode()
+    {
+        int randomNumber = Random.Range(100, 999);
+
+        safeCode = randomNumber.ToString();
+        Debug.Log(randomNumber);
     }
 
     public void ChangeRoom()
@@ -91,5 +105,15 @@ public class GameManager : MonoBehaviour
                 nocturnalObject.UpdateActive(IsNight);
             }
         }
+    }
+
+    public void TogglePlayer(bool canMove)
+    {
+        playerMovement.CanMove = canMove;
+    }
+
+    public bool CheckSafeCode(string code)
+    {
+        return safeCode == code;
     }
 }
