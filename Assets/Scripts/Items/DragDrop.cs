@@ -39,6 +39,13 @@ public class DragDrop : MonoBehaviour
         }
         else if (isDrag)
         {
+            // This is to avoid dragging objects after they are dragged a certain distance
+            EnableColliderOnDrag enableColliderOnDrag = focus.gameObject.GetComponent<EnableColliderOnDrag>();
+            if (enableColliderOnDrag != null && enableColliderOnDrag.RbEnabled)
+            {
+                return;
+            }
+
             mousePosition = Input.mousePosition;
             mousePosition.z = -cam.transform.position.z;
             position = cam.ScreenToWorldPoint(mousePosition);
