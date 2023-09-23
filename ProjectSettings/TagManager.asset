@@ -8,6 +8,7 @@ TagManager:
   - Door
   - Nocturnal
   - Safe
+  - Bookstore
   layers:
   - Default
   - TransparentFX

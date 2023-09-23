@@ -7,8 +7,10 @@ public class Interact : MonoBehaviour
 {
     private bool onDoor;
     private bool onSafe;
+    private bool onBookstore;
     private Door door;
     private Safe safe;
+    private Bookstore bookstore;
 
     private void Update()
     {
@@ -26,7 +28,11 @@ public class Interact : MonoBehaviour
     {
         if (onDoor)
         {
-            UseItemFunction();
+            UseItemOnDoor();
+        }
+        if (onBookstore)
+        {
+            UseItemOnBookstore();
         }
         else if (onSafe)
         {
@@ -34,9 +40,9 @@ public class Interact : MonoBehaviour
         }
     }
 
-    private void UseItemFunction()
+    private void UseItemOnDoor()
     {
-        if (!AvailableToUse())
+        if (!AbleToOpenDoor())
         {
             return;
         }
@@ -44,15 +50,26 @@ public class Interact : MonoBehaviour
         door.OpenDoor();
         InventoryManager.Instance.UseItem();
     }
-
-    private bool AvailableToUse()
+    
+    private void UseItemOnBookstore()
     {
-        if (InventoryManager.Instance.GetCurrentUsableType() == door.GetItemTypeToOpen())
+        if (!AbleToPlaceItem())
         {
-            return true;
+            return;
         }
 
-        return false;
+        bookstore.PlaceBook();
+        InventoryManager.Instance.UseItem();
+    }
+
+    private bool AbleToOpenDoor()
+    {
+        return InventoryManager.Instance.GetCurrentUsableType() == door.GetItemTypeToOpen();
+    }
+    
+    private bool AbleToPlaceItem()
+    {
+        return InventoryManager.Instance.GetCurrentUsableType() == bookstore.GetItemTypeToPlace();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -80,6 +97,11 @@ public class Interact : MonoBehaviour
             onSafe = true;
             safe = collision.gameObject.GetComponent<Safe>();
         }
+        else if (collision.gameObject.CompareTag("Bookstore"))
+        {
+            onBookstore = true;
+            bookstore = collision.gameObject.GetComponent<Bookstore>();
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -93,6 +115,11 @@ public class Interact : MonoBehaviour
         {
             onDoor = false;
             door = null;
+        }
+        else if (collision.gameObject.CompareTag("Bookstore"))
+        {
+            onBookstore = false;
+            bookstore = null;
         }
     }
 }
