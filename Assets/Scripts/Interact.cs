@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Interact : MonoBehaviour
 {
+    public bool canUseMachine = true;
+
     private bool onDoor;
     private bool onSafe;
     private bool onBookstore;
@@ -14,7 +16,7 @@ public class Interact : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && canUseMachine)
         {
             InventoryManager.Instance.ActivateItem();
         }

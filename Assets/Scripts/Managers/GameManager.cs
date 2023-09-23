@@ -9,8 +9,8 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] CameraController cam;
     [SerializeField] RoomBounds startingRoom;
-    [SerializeField] PlayerMovement playerMovement;
     [SerializeField] private TMP_Text[] mirrorTexts;
+    [SerializeField] private GameObject finishUI;
     [Header("Night")]
     [Tooltip("In seconds")]
     [SerializeField] int nightDuration;
@@ -23,6 +23,8 @@ public class GameManager : MonoBehaviour
     private readonly List<Nocturnal> nocturnalList = new List<Nocturnal>();
     public bool IsNight { get; private set; }
 
+    PlayerMovement playerMovement;
+    Interact interact;
     public static GameManager Instance;
 
     private void Awake()
@@ -39,6 +41,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        finishUI.SetActive(false);
         startingRoom.UpdateRoomBounds();
 
         GameObject[] nocturnalGOs = GameObject.FindGameObjectsWithTag("Nocturnal");
@@ -49,6 +52,14 @@ public class GameManager : MonoBehaviour
                 nocturnalList.Add(go.GetComponent<Nocturnal>());
                 go.SetActive(false);
             }
+        }
+
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+
+        if (player)
+        {
+            playerMovement = player.GetComponent<PlayerMovement>();
+            interact = player.GetComponent<Interact>();
         }
 
         CreateRandomSafeCode();
@@ -114,13 +125,20 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void TogglePlayer(bool canMove)
+    public void TogglePlayer(bool value)
     {
-        playerMovement.CanMove = canMove;
+        interact.canUseMachine = value;
+        playerMovement.CanMove = value;
     }
 
     public bool CheckSafeCode(string code)
     {
         return safeCode == code;
+    }
+
+    public void FinishGame()
+    {
+        TogglePlayer(false);
+        finishUI.SetActive(true);
     }
 }
