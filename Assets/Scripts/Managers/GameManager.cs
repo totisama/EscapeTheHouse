@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
@@ -9,6 +10,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] CameraController cam;
     [SerializeField] RoomBounds startingRoom;
     [SerializeField] PlayerMovement playerMovement;
+    [SerializeField] private TMP_Text[] mirrorTexts;
     [Header("Night")]
     [Tooltip("In seconds")]
     [SerializeField] int nightDuration;
@@ -65,6 +67,11 @@ public class GameManager : MonoBehaviour
 
         safeCode = randomNumber.ToString();
         Debug.Log(randomNumber);
+
+        for (int i = 0; i < safeCode.Length; i++)
+        {
+            mirrorTexts[i].text = safeCode[i].ToString();
+        }
     }
 
     public void ChangeRoom()
