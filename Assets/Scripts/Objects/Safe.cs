@@ -32,7 +32,7 @@ public class Safe : MonoBehaviour
         key.SetActive(false);
     }
 
-    public void OpenPad()
+    public void TogglePad()
     {
         bool active = pad.activeInHierarchy;
         pad.SetActive(!active);
@@ -55,7 +55,7 @@ public class Safe : MonoBehaviour
 
             if (correct)
             {
-                CorrectCode();
+                StartCoroutine(CorrectCode());
             }
             else
             {
@@ -64,13 +64,15 @@ public class Safe : MonoBehaviour
         }
     }
 
-    private void CorrectCode()
+    IEnumerator CorrectCode()
     {
         blocked = true;
         codeText.color = correctColor;
         sr.sprite = openedSprite;
         sr.sortingOrder = 0;
         key.SetActive(true);
+        yield return new WaitForSeconds(1.0f);
+        TogglePad();
     }
 
     IEnumerator WrongCode()

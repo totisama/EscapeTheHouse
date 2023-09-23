@@ -36,7 +36,7 @@ public class Interact : MonoBehaviour
         }
         else if (onSafe)
         {
-            safe.OpenPad();
+            safe.TogglePad();
         }
     }
 
