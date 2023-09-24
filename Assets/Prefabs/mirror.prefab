@@ -334,7 +334,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c177f80983f3ad4f80cc38b145c2f28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  changeSprite: 1
   daySprite: {fileID: 21300000, guid: 5e100ad4d13c3174d8d09ced5b036554, type: 3}
   nightSprite: {fileID: 21300000, guid: 4b3984f778ecbc34b8e350347110794c, type: 3}
   sr: {fileID: 6867447017313477739}
+  changeSprite: 1
+  changeActive: 1
