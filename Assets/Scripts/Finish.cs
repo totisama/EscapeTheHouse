@@ -8,6 +8,7 @@ public class Finish : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
+            AudioManager.Instance.PlaySFXSound("Complete");
             GameManager.Instance.FinishGame();
         }
     }

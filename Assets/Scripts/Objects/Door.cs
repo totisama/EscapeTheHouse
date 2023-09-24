@@ -96,6 +96,7 @@ public class Door : MonoBehaviour
         handle.SetActive(false);
         coll.isTrigger = true;
         state = DoorState.opened;
+        AudioManager.Instance.PlaySFXSound("OpenDoor");
 
         SetDoorSidesSortingOrder();
     }

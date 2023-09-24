@@ -34,12 +34,14 @@ public class InventoryManager : MonoBehaviour
         {
             activatable = item;
             AnchorToPlayer(item);
+            AudioManager.Instance.PlaySFXSound("Interact");
         }
         else if (usable == null)
         {
             usable = item;
 
             AddToUI(item);
+            AudioManager.Instance.PlaySFXSound("Interact");
         }
     }
 
