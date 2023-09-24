@@ -3,23 +3,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bookstore : MonoBehaviour
+public class Bookshelf : MonoBehaviour
 {
     [SerializeField] private Globals.ItemTypes itemTypeToPlace;
     [SerializeField] private Door doorToOpen;
-    [SerializeField] private Sprite fullBookstore;
+    [SerializeField] private Sprite fullBookshelf;
 
-    //private SpriteRenderer sr;
+    private SpriteRenderer sr;
 
     private void Awake()
     {
-        //sr = GetComponent<SpriteRenderer>();
+        sr = GetComponent<SpriteRenderer>();
     }
 
     public void PlaceBook()
     {
         doorToOpen.OpenDoor();
-        //sr.sprite = fullBookstore;
+        sr.sprite = fullBookshelf;
     }
 
     public Globals.ItemTypes GetItemTypeToPlace()

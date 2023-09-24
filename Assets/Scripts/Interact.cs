@@ -12,7 +12,7 @@ public class Interact : MonoBehaviour
     private bool onBookstore;
     private Door door;
     private Safe safe;
-    private Bookstore bookstore;
+    private Bookshelf bookstore;
 
     private void Update()
     {
@@ -102,7 +102,7 @@ public class Interact : MonoBehaviour
         else if (collision.gameObject.CompareTag("Bookstore"))
         {
             onBookstore = true;
-            bookstore = collision.gameObject.GetComponent<Bookstore>();
+            bookstore = collision.gameObject.GetComponent<Bookshelf>();
         }
     }
 
