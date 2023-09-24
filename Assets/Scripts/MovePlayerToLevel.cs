@@ -9,15 +9,20 @@ public class MovePlayerToLevel : MonoBehaviour
     [SerializeField] private float goYPosition;
     [SerializeField] private Transform playerTransform;
     [SerializeField] private RoomBounds nextRoom;
+    [SerializeField] private GameObject hideScreenObject;
 
     private bool inBounds;
+
+    private void Start()
+    {
+        hideScreenObject.SetActive(false);
+    }
 
     private void Update()
     {
         if (inBounds && (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W)))
         {
-            MovePlayerToNextLevel();
-            MoveCamera();
+            StartCoroutine(ChangeLevel());
         }
     }
 
@@ -46,5 +51,18 @@ public class MovePlayerToLevel : MonoBehaviour
         {
             inBounds = false;
         }
+    }
+
+    IEnumerator ChangeLevel()
+    {
+        AudioManager.Instance.PlaySFXSound("Stairs");
+        hideScreenObject.SetActive(true);
+        GameManager.Instance.TogglePlayer(false);
+        yield return new WaitForSeconds(1.5f);
+        MovePlayerToNextLevel();
+        MoveCamera();
+        yield return new WaitForSeconds(0.5f);
+        GameManager.Instance.TogglePlayer(true);
+        hideScreenObject.SetActive(false);
     }
 }

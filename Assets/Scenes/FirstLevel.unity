@@ -1559,6 +1559,7 @@ MonoBehaviour:
   goYPosition: 30.73652
   playerTransform: {fileID: 1889282735}
   nextRoom: {fileID: 1096062204}
+  hideScreenObject: {fileID: 2106941947}
 --- !u!61 &195559516
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2431,6 +2432,7 @@ MonoBehaviour:
   dialogs:
   - Is this the machine to switch to night for a few seconds?
   tagToSearch: Player
+  alwaysShowDialog: 0
   typingSpeed: 0.05
   nextDialog: 1.5
 --- !u!61 &282903387
@@ -3675,6 +3677,7 @@ RectTransform:
   - {fileID: 1752454215}
   - {fileID: 1351834603}
   - {fileID: 113435634}
+  - {fileID: 2106941948}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -4980,8 +4983,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0, y: -0.00000011920929, z: 0}
-    m_Extent: {x: 0.9985302, y: 0.99853027, z: 0}
+    m_Center: {x: 0.69869995, y: -0.06824994, z: 0}
+    m_Extent: {x: 14.8155, y: 5.0211496, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -4992,10 +4995,10 @@ MonoBehaviour:
   m_ShapeLightFalloffSize: 0.5
   m_ShapeLightFalloffOffset: {x: 0, y: 0}
   m_ShapePath:
-  - {x: -0.5, y: -0.5, z: 0}
-  - {x: 0.5, y: -0.5, z: 0}
-  - {x: 0.5, y: 0.5, z: 0}
-  - {x: -0.5, y: 0.5, z: 0}
+  - {x: -13.624689, y: -4.545957, z: 0}
+  - {x: 14.8861265, y: -4.5829906, z: 0}
+  - {x: 15.006236, y: 4.299252, z: 0}
+  - {x: -13.575349, y: 4.447275, z: 0}
 --- !u!4 &619394802
 Transform:
   m_ObjectHideFlags: 0
@@ -5449,6 +5452,7 @@ MonoBehaviour:
   goYPosition: 15.20652
   playerTransform: {fileID: 1889282735}
   nextRoom: {fileID: 575551378}
+  hideScreenObject: {fileID: 2106941947}
 --- !u!61 &739814098
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -7360,6 +7364,7 @@ MonoBehaviour:
   dialogs:
   - Mmmm it looks like this book shelf is missing a book.
   tagToSearch: Player
+  alwaysShowDialog: 0
   typingSpeed: 0.1
   nextDialog: 1
 --- !u!61 &1078400798
@@ -7460,6 +7465,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 94047032923442545, guid: fad4220c520afe2418d22e3d720db054, type: 3}
       propertyPath: showAfterDoorOpen
+      value: 
+      objectReference: {fileID: 461186220}
+    - target: {fileID: 94047032923442545, guid: fad4220c520afe2418d22e3d720db054, type: 3}
+      propertyPath: showAfterDoorOpens
       value: 
       objectReference: {fileID: 461186220}
     - target: {fileID: 94047032923442545, guid: fad4220c520afe2418d22e3d720db054, type: 3}
@@ -7609,6 +7618,7 @@ MonoBehaviour:
   - This book contains the code order to open the safe.
   - First should be the kitchen number, then the attic and finally the office one.
   tagToSearch: Player
+  alwaysShowDialog: 1
   typingSpeed: 0.05
   nextDialog: 1.5
 --- !u!61 &1083596350
@@ -9315,6 +9325,7 @@ MonoBehaviour:
   goYPosition: 15.20652
   playerTransform: {fileID: 1889282735}
   nextRoom: {fileID: 575551378}
+  hideScreenObject: {fileID: 2106941947}
 --- !u!61 &1361876869
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -11472,6 +11483,8 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 31affa491a3226840bab3cbd6eb30045, type: 3}
   - name: OpenDoor
     clip: {fileID: 8300000, guid: 4d522fe0765fa0e43ac57ad2ae1341aa, type: 3}
+  - name: Stairs
+    clip: {fileID: 8300000, guid: c75a9f722f3253c40a9d3ca9409e29f0, type: 3}
   initialBackgroundClip: Ambient
 --- !u!1 &1611906831
 GameObject:
@@ -14133,6 +14146,7 @@ MonoBehaviour:
   goYPosition: -2.126048
   playerTransform: {fileID: 1889282735}
   nextRoom: {fileID: 1640689706}
+  hideScreenObject: {fileID: 2106941947}
 --- !u!61 &2006100395
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -14838,6 +14852,81 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &2106941947
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2106941948}
+  - component: {fileID: 2106941950}
+  - component: {fileID: 2106941949}
+  m_Layer: 5
+  m_Name: black screen
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2106941948
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2106941947}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 491001097}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 2.2493896, y: 5.623398}
+  m_SizeDelta: {x: 35.9904, y: 33.7408}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2106941949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2106941947}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &2106941950
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2106941947}
+  m_CullTransparentMesh: 1
 --- !u!1 &2113282551
 GameObject:
   m_ObjectHideFlags: 0
