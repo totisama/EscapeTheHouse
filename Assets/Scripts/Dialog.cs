@@ -10,6 +10,7 @@ public class Dialog : MonoBehaviour
     [SerializeField] private int dialogTextFont;
     [SerializeField] private string[] dialogs;
     [SerializeField] private string tagToSearch;
+    [SerializeField] private bool alwaysShowDialog;
     [Header("Typing")]
     [SerializeField] private float typingSpeed;
     [SerializeField] private float nextDialog;
@@ -25,8 +26,11 @@ public class Dialog : MonoBehaviour
 
     private void OpenDialog()
     {
+        if (!alwaysShowDialog)
+        {
+            opened = true;
+        }
         dialogText.fontSize = dialogTextFont;
-        opened = true;
         dialogPanel.SetActive(true);
         GameManager.Instance.TogglePlayer(false);
         StartCoroutine(Typing());
