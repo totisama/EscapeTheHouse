@@ -76,6 +76,7 @@ public class InventoryManager : MonoBehaviour
     {
         item.gameObject.transform.position = Vector3.zero;
         item.gameObject.transform.SetParent(machineAnchor, false);
+        item.gameObject.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
     }
 
     public Globals.ItemTypes GetCurrentUsableType()
