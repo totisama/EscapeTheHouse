@@ -19,6 +19,8 @@ public class Door : MonoBehaviour
     [SerializeField] private SpriteRenderer background;
     [SerializeField] private SpriteRenderer front;
     [SerializeField] private SpriteRenderer back;
+    [Header("Special")]
+    [SerializeField] private GameObject showAfterDoorOpens;
 
     private Collider2D coll;
 
@@ -50,6 +52,11 @@ public class Door : MonoBehaviour
         else
         {
             DoorClosed();
+        }
+
+        if (showAfterDoorOpens != null)
+        {
+            showAfterDoorOpens.SetActive(false);
         }
     }
 
@@ -99,6 +106,17 @@ public class Door : MonoBehaviour
         AudioManager.Instance.PlaySFXSound("OpenDoor");
 
         SetDoorSidesSortingOrder();
+
+        if (showAfterDoorOpens != null)
+        {
+            StartCoroutine(ShowObject());
+        }
+    }
+
+    IEnumerator ShowObject()
+    {
+        yield return new WaitForSeconds(2.0f);
+        showAfterDoorOpens.SetActive(true);
     }
 
     public Globals.ItemTypes GetItemTypeToOpen()
