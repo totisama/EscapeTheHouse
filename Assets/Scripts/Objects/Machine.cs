@@ -6,7 +6,7 @@ using UnityEngine.Rendering.Universal;
 
 public class Machine : MonoBehaviour
 {
-    [SerializeField] private Light2D myLight;
+    [SerializeField] private SpriteRenderer sr;
     [Tooltip("In seconds")]
     public int cooldown;
     [Header("Colors")]
@@ -18,7 +18,7 @@ public class Machine : MonoBehaviour
 
     void Start()
     {
-        myLight.color = on;
+        sr.color = on;
     }
 
     private void Update()
@@ -38,7 +38,7 @@ public class Machine : MonoBehaviour
     {
        if (isNight)
        {
-            myLight.color = off;
+            sr.color = off;
        }
        else if (!charging && chargingParam)
        {
@@ -48,7 +48,7 @@ public class Machine : MonoBehaviour
        else
        {
             charging = false;
-            myLight.color = on;
+            sr.color = on;
        }
     }
 }
