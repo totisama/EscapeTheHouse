@@ -3,7 +3,13 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - CollectableItem
+  - Door
+  - Nocturnal
+  - Safe
+  - Bookstore
+  - Ghost
   layers:
   - Default
   - TransparentFX
@@ -11,7 +17,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - DraggableItems
   - 
   - 
   - 
@@ -38,6 +44,15 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 1695184207
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Interactable
+    uniqueID: 4131446853
+    locked: 0
+  - name: UI
+    uniqueID: 3844276153
     locked: 0

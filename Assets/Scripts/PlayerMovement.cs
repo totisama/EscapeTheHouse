@@ -1,18 +1,70 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    [SerializeField] float moveSpeed;
+
+    private Rigidbody2D rb;
+    private float horizontal;
+    private bool canMove;
+    public bool CanMove {
+        get { return canMove; } 
+        set { 
+            if (!value)
+            {
+                rb.velocity = Vector3.zero;
+            }
+
+            canMove = value;
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Awake()
     {
-        
+        rb = GetComponent<Rigidbody2D>();
+    }
+
+    private void Start()
+    {
+        CanMove = true; 
+    }
+
+    private void Update()
+    {
+        horizontal = Input.GetAxisRaw("Horizontal");
+    }
+
+    void FixedUpdate()
+    {
+        if (!CanMove)
+        {
+            return;
+        }
+
+        rb.velocity = new Vector2(horizontal * moveSpeed, rb.velocity.y);
+
+        if (horizontal != 0.0f)
+        {
+            FlipScale(horizontal);
+        }
+    }
+
+    private void FlipScale(float horizontal)
+    {
+        Vector3 scale = transform.localScale;
+
+        if (horizontal < 0)
+        {
+            scale.x = Mathf.Abs(scale.x) * -1;
+        }
+        else
+        {
+            scale.x = Mathf.Abs(scale.x);
+        }
+
+        transform.localScale = scale;
     }
 }
