@@ -9,6 +9,7 @@ TagManager:
   - Nocturnal
   - Safe
   - Bookstore
+  - Ghost
   layers:
   - Default
   - TransparentFX
