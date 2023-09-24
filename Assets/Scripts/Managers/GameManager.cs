@@ -7,6 +7,7 @@ using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] private Machine machine;
     [SerializeField] CameraController cam;
     [SerializeField] RoomBounds startingRoom;
     [SerializeField] private TMP_Text[] mirrorTexts;
@@ -14,9 +15,8 @@ public class GameManager : MonoBehaviour
     [Header("Night")]
     [Tooltip("In seconds")]
     [SerializeField] int nightDuration;
-    [Tooltip("In seconds")]
-    [SerializeField] int nightCooldown;
 
+    private int nightCooldown;
     private float currentNightTime;
     private float timeToCharge;
     private string safeCode;
@@ -43,6 +43,8 @@ public class GameManager : MonoBehaviour
     {
         finishUI.SetActive(false);
         startingRoom.UpdateRoomBounds();
+
+        nightCooldown = machine.cooldown;
 
         GameObject[] nocturnalGOs = GameObject.FindGameObjectsWithTag("Nocturnal");
         foreach (GameObject go in nocturnalGOs)
@@ -113,6 +115,8 @@ public class GameManager : MonoBehaviour
         }
 
         IsNight = !IsNight;
+
+        machine.ChangeState(IsNight, Time.time < timeToCharge);
 
         LightManager.Instance.ChangeMainLightColor(IsNight);
 
