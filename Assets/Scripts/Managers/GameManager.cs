@@ -52,7 +52,7 @@ public class GameManager : MonoBehaviour
             if (go != null)
             {
                 nocturnalList.Add(go.GetComponent<Nocturnal>());
-                go.SetActive(false);
+                go.GetComponent<Nocturnal>().UpdateNocturnal(false);
             }
         }
 
@@ -124,7 +124,7 @@ public class GameManager : MonoBehaviour
         {
             if (nocturnalObject != null)
             {
-                nocturnalObject.UpdateActive(IsNight);
+                nocturnalObject.UpdateNocturnal(IsNight);
             }
         }
     }
