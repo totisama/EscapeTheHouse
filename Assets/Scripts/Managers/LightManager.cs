@@ -21,7 +21,7 @@ public class LightManager : MonoBehaviour
         }
 
         Instance = this;
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
     }
 
     public void ChangeMainLightColor(bool isNight)

@@ -11,6 +11,8 @@ public class CameraController : MonoBehaviour
     private Camera cam;
     private Bounds cameraBounds;
     private Vector3 targetPosition;
+    private float height;
+    private float width;
 
     void Awake()
     {
@@ -19,6 +21,9 @@ public class CameraController : MonoBehaviour
 
     private void Start()
     {
+        height = cam.orthographicSize;
+        width = height * cam.aspect;
+
         UpdateCameraBounds();
     }
 
@@ -42,9 +47,6 @@ public class CameraController : MonoBehaviour
 
     public void UpdateCameraBounds()
     {
-        float height = cam.orthographicSize;
-        float width = height * cam.aspect;
-
         Bounds roomBounds = Globals.RoomBounds;
 
         float minX = roomBounds.min.x + width;

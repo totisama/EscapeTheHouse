@@ -12,16 +12,20 @@ public class UpdateCurrentRoom : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+            bool comesFromRight;
+
             if (playerTransform.position.x < transform.position.x)
             {
                 leftRoom.UpdateRoomBounds();
+                comesFromRight = true;
             }
             else
             {
                 rightRoom.UpdateRoomBounds();
+                comesFromRight = false;
             }
 
-            GameManager.Instance.ChangeRoom();
+            GameManager.Instance.ChangeRoom(comesFromRight);
         }
     }
 }

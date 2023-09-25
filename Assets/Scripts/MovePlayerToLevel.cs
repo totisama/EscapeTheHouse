@@ -10,6 +10,7 @@ public class MovePlayerToLevel : MonoBehaviour
     [SerializeField] private Transform playerTransform;
     [SerializeField] private RoomBounds nextRoom;
     [SerializeField] private GameObject hideScreenObject;
+    [SerializeField] private int level;
 
     private bool inBounds;
 
@@ -29,6 +30,7 @@ public class MovePlayerToLevel : MonoBehaviour
     private void MoveCamera()
     {
         nextRoom.UpdateRoomBounds();
+        GameManager.Instance.UpdatePlayerLevel(level);
         GameManager.Instance.ChangeRoom();
     }
 
