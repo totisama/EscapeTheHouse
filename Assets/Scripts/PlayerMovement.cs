@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float moveSpeed;
 
     private Rigidbody2D rb;
+    private Animator anim;
     private float horizontal;
     private bool canMove;
     public bool CanMove {
@@ -25,6 +26,7 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
     }
 
     private void Start()
@@ -41,7 +43,17 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!CanMove)
         {
+            anim.SetBool("move", false);
             return;
+        }
+
+        if (horizontal == 0.0f)
+        {
+            anim.SetBool("move", false);
+        }
+        else
+        {
+            anim.SetBool("move", true);
         }
 
         rb.velocity = new Vector2(horizontal * moveSpeed, rb.velocity.y);
