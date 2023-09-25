@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 9124993058234389415}
   - component: {fileID: 3876439643670607933}
   - component: {fileID: 5456119098524895610}
+  - component: {fileID: 9169796982619987319}
   m_Layer: 0
   m_Name: key
   m_TagString: CollectableItem
@@ -217,3 +218,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &9169796982619987319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 114950343331880242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae2573d441e711e42a5dcbede3f522b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  highlightColor: {r: 0.9435899, g: 1, b: 0, a: 1}
+  playerTransform: {fileID: 0}
+  distanceToHighligh: 5
