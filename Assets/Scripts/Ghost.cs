@@ -71,7 +71,6 @@ public class Ghost : MonoBehaviour
         else
         {
             roomIndex = GameManager.Instance.GetPlayerNextRoom(levelRooms[level].bounds);
-            //AudioManager.Instance.PlaySFXSound("Encounter");
         }
 
         transform.position = levelRoom.bounds[roomIndex].GetGhostPosition(enterFromRight);
