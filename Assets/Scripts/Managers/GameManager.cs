@@ -84,7 +84,6 @@ public class GameManager : MonoBehaviour
         int randomNumber = Random.Range(100, 999);
 
         safeCode = randomNumber.ToString();
-        Debug.Log(randomNumber);
 
         for (int i = 0; i < safeCode.Length; i++)
         {
